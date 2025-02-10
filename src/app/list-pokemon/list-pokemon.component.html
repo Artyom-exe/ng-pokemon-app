@@ -1,0 +1,18 @@
+<div class="flex flex-wrap">
+  <div class="lg:w-1/3 sm:w-full md:w-1/2 p-4 hover:scale-105" *ngFor="let pokemon of pokemonList">
+    <div class="flex items-center justify-around bg-white shadow-lg rounded-lg overflow-hidden" pkmnBorderCard>
+      <div class="card-image object-cover w-40 h-40">
+        <img [src]="pokemon.picture" alt="pokemon" />
+      </div>
+      <div class="card-body flex flex-col w-1/2 p-4">
+        <p class="card-title text-2xl font-semibold"> {{pokemon.name}} </p>
+        <p class="card-created"> {{pokemon.created | date:'dd/MM/yyy' }} </p>
+        <div class="flex gap-2 mt-3">
+          <span *ngFor="let type of pokemon.types" class="{{ type | pokemonTypeColor }} inline-block">
+            {{type}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
