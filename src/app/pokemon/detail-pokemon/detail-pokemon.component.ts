@@ -10,6 +10,7 @@ import { PokemonService } from '../pokemon.service';
   standalone: true,
   imports: [CommonModule, PokemonTypeColorPipe],
   templateUrl: './detail-pokemon.component.html',
+  providers: [PokemonService],
   styles: ``
 })
 export class DetailPokemonComponent implements OnInit {
