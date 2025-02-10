@@ -14,7 +14,7 @@ import { PokemonService } from '../pokemon.service';
   styles: ``
 })
 export class ListPokemonComponent {
-  pokemonList: Pokemon[] = [];
+  pokemonList: Pokemon[];
 
     constructor(private router: Router,
       private pokemonService: PokemonService
