@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { POKEMONS } from '../mock-pokemon';
-import { Pokemon } from '../pokemon';
+import { Pokemon } from '../../pokemon';
 import { PokemonTypeColorPipe } from '../pokemon-type-color.pipe';
 
 @Component({
@@ -17,7 +17,7 @@ export class DetailPokemonComponent implements OnInit {
   pokemon: Pokemon|undefined;
 
   constructor(
-    private route: ActivatedRoute,
+    private route: ActivatedRoute,  
     private router: Router
   ) { }
 
@@ -27,6 +27,7 @@ export class DetailPokemonComponent implements OnInit {
 
     if(pokemonId) {
       this.pokemon = this.pokemonList.find(pokemon => pokemon.id === +pokemonId)
+
     }
   }
 
