@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Pokemon } from '../../pokemon';
-import { NgFor, DatePipe } from '@angular/common';
+import { NgFor, DatePipe, CommonModule } from '@angular/common';
 import { BorderCardDirective } from '../border-card.directive';
 import { PokemonTypeColorPipe } from '../pokemon-type-color.pipe';
 import { Router } from '@angular/router';
@@ -9,24 +9,23 @@ import { PokemonService } from '../pokemon.service';
 @Component({
   selector: 'app-list-pokemon',
   standalone: true,
-  imports: [NgFor, BorderCardDirective, DatePipe, PokemonTypeColorPipe],
+  imports: [NgFor, BorderCardDirective, DatePipe, PokemonTypeColorPipe, CommonModule],
   templateUrl: './list-pokemon.component.html',
-  providers: [PokemonService],
   styles: ``
 })
 export class ListPokemonComponent {
   pokemonList: Pokemon[];
 
-    constructor(private router: Router,
-      private pokemonService: PokemonService
-    ) {}
+  private router = inject(Router);
+  private pokemonService = inject(PokemonService);
 
+  constructor() {}
 
-    ngOninit() {
-      this.pokemonList = this.pokemonService.getPokemonList();
-    }
+  ngOnInit() {
+    this.pokemonList = this.pokemonService.getPokemonList();
+  }
 
-    goToPokemon(pokemon: Pokemon) {
-      this.router.navigate(['/pokemons', pokemon.id]);
-    }
+  goToPokemon(pokemon: Pokemon) {
+    this.router.navigate(['/pokemons', pokemon.id]);
+  }
 }

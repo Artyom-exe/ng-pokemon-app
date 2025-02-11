@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Pokemon } from '../../pokemon';
@@ -10,25 +10,23 @@ import { PokemonService } from '../pokemon.service';
   standalone: true,
   imports: [CommonModule, PokemonTypeColorPipe],
   templateUrl: './detail-pokemon.component.html',
-  providers: [PokemonService],
   styles: ``
 })
 export class DetailPokemonComponent implements OnInit {
   pokemonList: Pokemon[];
-  pokemon: Pokemon|undefined;
+  pokemon: Pokemon | undefined;
 
-  constructor(
-    private route: ActivatedRoute,  
-    private router: Router,
-    private pokemonService: PokemonService
-  ) { }
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private pokemonService = inject(PokemonService); // ✅ Récupère l'instance fournie par `PokemonShellComponent`
+
+  constructor() {}
 
   ngOnInit(): void {
-    const pokemonId: string|null = this.route.snapshot.paramMap.get('id');
+    const pokemonId: string | null = this.route.snapshot.paramMap.get('id');
 
-    if(pokemonId) {
+    if (pokemonId) {
       this.pokemon = this.pokemonService.getPokemonByid(+pokemonId);
-
     }
   }
 
